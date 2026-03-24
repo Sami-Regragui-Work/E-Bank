@@ -19,9 +19,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'birthdate',
+        'is_admin',
     ];
 
     /**
@@ -44,6 +48,52 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birthdate' => 'date',
+            'is_admin' => 'boolean',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
+
+    public function accounts()
+    {
+        return $this->belongsToMany(Account::class, 'account_users')
+            ->withPivot('role_id', 'accept_closure')
+            ->withTimestamps();
+    }
+
+    public function blockedAccountActions()
+    {
+        return $this->hasMany(BlockedAccount::class, 'admin_id');
+    }
+
+    public function sentTransfers()
+    {
+        return $this->hasMany(Transfer::class, 'sender_id');
+    }
+
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class, 'sender_id');
+    }
+
+    public function withdrawals()
+    {
+        return $this->hasMany(Withdrawal::class, 'user_id');
+    }
+
+    public function sentInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'sender_id');
     }
 }
