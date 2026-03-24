@@ -18,7 +18,7 @@ return new class extends Migration
             $table->smallInteger('monthly_withdrawal_limit')->default(0);
             $table->decimal('balance', 12, 2)->default(0.00);
             $table->enum('status', ['ACTIVE', 'BLOCKED', 'CLOSED'])->default('ACTIVE');
-            $table->foreignId('type_id')->constrained('types')->restrictOnDelete();
+            $table->foreignId('type_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }
