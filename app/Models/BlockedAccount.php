@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlockedAccount extends Model
 {
     public $timestamps = false;
-
+    public $incrementing = false;
     protected $fillable = [
         'account_id',
         'admin_id',

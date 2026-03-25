@@ -41,7 +41,7 @@ class Account extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'account_users')
-            ->withPivot('role_id', 'accept_closure')
+            ->using(AccountUser::class)
             ->withTimestamps();
     }
 

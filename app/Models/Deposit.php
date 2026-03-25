@@ -10,7 +10,6 @@ class Deposit extends Model
     use HasFactory;
 
     public $timestamps = false;
-
     protected $fillable = [
         'sender_id',
         'account_id',
