@@ -97,4 +97,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Invitation::class, 'sender_id');
     }
+
+    // Helper
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
 }
