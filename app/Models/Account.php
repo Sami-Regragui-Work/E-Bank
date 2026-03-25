@@ -74,4 +74,35 @@ class Account extends Model
     {
         return $this->hasMany(Invitation::class);
     }
+
+    // Helper
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function isBlocked(): bool
+    {
+        return $this->status === self::STATUS_BLOCKED;
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === self::STATUS_CLOSED;
+    }
+
+    public function isCourant(): bool
+    {
+        return $this->type->isCourant();
+    }
+
+    public function isEpargne(): bool
+    {
+        return $this->type->isEpargne();
+    }
+
+    public function isMineur(): bool
+    {
+        return $this->type->isMineur();
+    }
 }
