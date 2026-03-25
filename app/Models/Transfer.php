@@ -44,4 +44,20 @@ class Transfer extends Model
     {
         return $this->belongsTo(Account::class, 'receiver_account_id');
     }
+
+    // Helper
+    public function isPending(): bool
+    {
+        return $this->status === self::STATUS_PENDING;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->status === self::STATUS_COMPLETED;
+    }
+
+    public function isFailed(): bool
+    {
+        return $this->status === self::STATUS_FAILED;
+    }
 }
