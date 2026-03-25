@@ -35,4 +35,35 @@ class Type extends Model
     {
         return $this->hasMany(Account::class);
     }
+
+    // Helper
+    public function isCourant(): bool
+    {
+        return $this->name === self::COURANT;
+    }
+
+    public function isEpargne(): bool
+    {
+        return $this->name === self::EPARGNE;
+    }
+
+    public function isMineur(): bool
+    {
+        return $this->name === self::MINEUR;
+    }
+
+    public function allowsOverdraft(): bool
+    {
+        return $this->isCourant() && $this->overdraft_limit > 0;
+    }
+
+    public function hasMonthlyFee(): bool
+    {
+        return $this->isCourant() && $this->monthly_fee > 0;
+    }
+
+    public function hasInterestRate(): bool
+    {
+        return ($this->isEpargne() || $this->isMineur()) && $this->interest_rate > 0;
+    }
 }
