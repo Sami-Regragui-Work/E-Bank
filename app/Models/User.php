@@ -69,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
     public function accounts()
     {
         return $this->belongsToMany(Account::class, 'account_users')
-            ->withPivot('role_id', 'accept_closure')
+            ->using(AccountUser::class)
             ->withTimestamps();
     }
 

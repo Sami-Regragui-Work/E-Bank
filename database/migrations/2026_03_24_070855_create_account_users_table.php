@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('account_users', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('account_id')->constrained()->cascadeOnDelete();
+            $table->primary(['user_id', 'account_id']);
             $table->foreignId('role_id')->constrained()->restrictOnDelete();
             $table->boolean('accept_closure')->default(false);
             $table->timestamps();

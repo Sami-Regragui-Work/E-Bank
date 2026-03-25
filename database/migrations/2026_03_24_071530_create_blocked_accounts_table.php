@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blocked_accounts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('account_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('account_id')->primary()->constrained()->cascadeOnDelete();
             $table->foreignId('admin_id')->constrained('users')->restrictOnDelete();
             $table->timestamp('blocked_at');
             $table->string('reason', 255);

@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class AccountUser extends Pivot
 {
-    protected $fillable = ['user_id', 'account_id', 'role_id', 'accept_closure'];
+    public $incrementing = false;
+    protected $primaryKey = [
+        'user_id',
+        'account_id'
+    ];
+    protected $fillable = [
+        'user_id',
+        'account_id',
+        'role_id',
+        'accept_closure'
+    ];
 
     public function role()
     {
