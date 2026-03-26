@@ -6,8 +6,16 @@ use Exception;
 
 class AppException extends Exception
 {
-    public function __construct(string $message, int $code = 422)
+    public function __construct(
+        string $message,
+        private readonly string $errorCode,
+        int $httpStatus
+    ) {
+        parent::__construct($message, $httpStatus);
+    }
+
+    public function getErrorCode(): string
     {
-        parent::__construct($message, $code);
+        return $this->errorCode;
     }
 }
