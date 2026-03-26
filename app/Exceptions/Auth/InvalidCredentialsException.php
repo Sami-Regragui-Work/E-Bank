@@ -8,6 +8,10 @@ class InvalidCredentialsException extends AppException
 {
     public function __construct()
     {
-        parent::__construct('Invalid credentials.', 401);
+        parent::__construct(
+            'Invalid credentials.',
+            'INVALID_CREDENTIALS',
+            401
+        );
     }
 }
