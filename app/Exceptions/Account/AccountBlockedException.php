@@ -8,6 +8,10 @@ class AccountBlockedException extends AppException
 {
     public function __construct()
     {
-        parent::__construct('This account is blocked and cannot perform operations.', 403);
+        parent::__construct(
+            'This account is blocked.',
+            'ACCOUNT_BLOCKED',
+            403
+        );
     }
 }
