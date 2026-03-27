@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('users')->restrictOnDelete();
+            $table->foreignId('sender_id')->nullable()->constrained('users')->restrictOnDelete();
             $table->foreignId('account_id')->constrained()->restrictOnDelete();
             $table->decimal('amount', 12, 2);
+            $table->boolean('is_interest')->default(false);
             $table->timestamp('created_at');
         });
     }
