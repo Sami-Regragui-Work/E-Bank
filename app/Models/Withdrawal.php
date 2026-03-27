@@ -14,12 +14,14 @@ class Withdrawal extends Model
         'user_id',
         'account_id',
         'amount',
+        'is_fee',
     ];
 
     protected function casts()
     {
         return [
             'amount' => 'decimal:2',
+            'is_fee' => 'boolean',
             'created_at' => 'datetime',
         ];
     }

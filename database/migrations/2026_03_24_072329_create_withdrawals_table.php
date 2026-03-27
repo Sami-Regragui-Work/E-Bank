@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->restrictOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->restrictOnDelete();
             $table->foreignId('account_id')->constrained()->restrictOnDelete();
             $table->decimal('amount', 12, 2);
+            $table->boolean('is_fee')->default(false);
             $table->timestamp('created_at');
         });
     }

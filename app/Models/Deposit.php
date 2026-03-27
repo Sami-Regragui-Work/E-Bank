@@ -14,12 +14,14 @@ class Deposit extends Model
         'sender_id',
         'account_id',
         'amount',
+        'is_interest',
     ];
 
     protected function casts()
     {
         return [
             'amount' => 'decimal:2',
+            'is_interest' => 'boolean',
             'created_at' => 'datetime',
         ];
     }
