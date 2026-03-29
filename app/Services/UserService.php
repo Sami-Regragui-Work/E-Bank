@@ -4,8 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\Auth\InvalidCredentialsException;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Auth, Hash};
 
 class UserService
 {
