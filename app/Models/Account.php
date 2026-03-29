@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Account extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'RIB',
         'daily_transaction_limit',
