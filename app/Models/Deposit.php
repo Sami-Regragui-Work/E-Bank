@@ -26,11 +26,11 @@ class Deposit extends Model
         ];
     }
 
+    // Relations
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
-
     public function account()
     {
         return $this->belongsTo(Account::class);

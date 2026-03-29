@@ -8,6 +8,7 @@ class BlockedAccount extends Model
 {
     public $timestamps = false;
     public $incrementing = false;
+    protected $primaryKey = ['account_id'];
     protected $fillable = [
         'account_id',
         'admin_id',
@@ -24,11 +25,11 @@ class BlockedAccount extends Model
         ];
     }
 
+    // Relations
     public function account()
     {
         return $this->belongsTo(Account::class);
     }
-
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id');

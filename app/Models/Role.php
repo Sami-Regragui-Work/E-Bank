@@ -13,6 +13,7 @@ class Role extends Model
     public const GUARDIAN = 'GUARDIAN';
     public const MINOR = 'MINOR';
 
+    // Relations
     public function accountUsers()
     {
         return $this->hasMany(AccountUser::class);
