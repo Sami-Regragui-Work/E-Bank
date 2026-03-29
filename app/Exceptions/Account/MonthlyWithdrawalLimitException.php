@@ -11,7 +11,7 @@ class MonthlyWithdrawalLimitException extends AppException
         parent::__construct(
             'The monthly withdrawal limit has been reached.',
             'MONTHLY_WITHDRAWAL_LIMIT_REACHED',
-            409
+            422
         );
     }
 }

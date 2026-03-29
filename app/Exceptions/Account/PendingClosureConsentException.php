@@ -11,7 +11,7 @@ class PendingClosureConsentException extends AppException
         parent::__construct(
             'All account owners must consent before closing.',
             'PENDING_CLOSURE_CONSENT',
-            409
+            422
         );
     }
 }

@@ -11,7 +11,7 @@ class NonZeroBalanceException extends AppException
         parent::__construct(
             'Account balance must be zero before closing.',
             'NON_ZERO_BALANCE',
-            409
+            422
         );
     }
 }
