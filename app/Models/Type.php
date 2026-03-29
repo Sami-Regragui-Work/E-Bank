@@ -27,43 +27,34 @@ class Type extends Model
         ];
     }
 
-    public const COURANT = 'COURANT';
-    public const EPARGNE = 'EPARGNE';
-    public const MINEUR = 'MINEUR';
+    // Type Constants
+    public const CURRENT = 'CURRENT';
+    public const SAVINGS = 'SAVINGS';
+    public const MINOR = 'MINOR';
 
+    // Relations
     public function accounts()
     {
         return $this->hasMany(Account::class);
     }
 
-    // Helper
-    public function isCourant(): bool
+    // Type Helpers
+    public function isCurrent(): bool
     {
-        return $this->name === self::COURANT;
+        return $this->name === self::CURRENT;
+    }
+    public function isSavings(): bool
+    {
+        return $this->name === self::SAVINGS;
+    }
+    public function isMinor(): bool
+    {
+        return $this->name === self::MINOR;
     }
 
-    public function isEpargne(): bool
+    // Attribute
+    public function getFormattedInterestRate(): string
     {
-        return $this->name === self::EPARGNE;
-    }
-
-    public function isMineur(): bool
-    {
-        return $this->name === self::MINEUR;
-    }
-
-    public function allowsOverdraft(): bool
-    {
-        return $this->isCourant() && $this->overdraft_limit > 0;
-    }
-
-    public function hasMonthlyFee(): bool
-    {
-        return $this->isCourant() && $this->monthly_fee > 0;
-    }
-
-    public function hasInterestRate(): bool
-    {
-        return ($this->isEpargne() || $this->isMineur()) && $this->interest_rate > 0;
+        return number_format($this->interest_rate * 100, 2) . '%';
     }
 }

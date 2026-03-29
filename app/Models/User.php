@@ -56,51 +56,50 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    // JWT getters
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
-
     public function getJWTCustomClaims(): array
     {
         return [];
     }
 
+    // Relations
     public function accounts()
     {
-        return $this->belongsToMany(Account::class, 'account_users')
-            ->using(AccountUser::class)
-            ->withTimestamps();
+        return $this->belongsToMany(Account::class, 'account_users')->using(AccountUser::class)->withTimestamps();
     }
-
     public function blockedAccountActions()
     {
         return $this->hasMany(BlockedAccount::class, 'admin_id');
     }
-
     public function sentTransfers()
     {
         return $this->hasMany(Transfer::class, 'sender_id');
     }
-
     public function deposits()
     {
         return $this->hasMany(Deposit::class, 'sender_id');
     }
-
     public function withdrawals()
     {
         return $this->hasMany(Withdrawal::class, 'user_id');
     }
-
     public function sentInvitations()
     {
         return $this->hasMany(Invitation::class, 'sender_id');
     }
 
-    // Helper
-    public function isAdmin(): bool
+    // Age Helpers
+    public function age(): int
     {
-        return $this->is_admin;
+        return $this->birthdate->age ?? 0;
+    }
+
+    public function isMinor(): bool
+    {
+        return $this->age() < 18;
     }
 }

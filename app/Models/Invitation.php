@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Invitation extends Model
 {
@@ -21,13 +22,22 @@ class Invitation extends Model
         ];
     }
 
+    // Relations
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
-
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    // Boot
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($invitation) {
+            $invitation->token ??= Str::random(60);
+        });
     }
 }
