@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\{Auth, DB};
 
 class DepositService
 {
+    public function __construct()
+    {
+        Auth::shouldUse('api');
+    }
+    
     public function makeDeposit(int $accountId, float $amount): Deposit
     {
         $depositor = Auth::user();

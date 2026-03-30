@@ -6,14 +6,13 @@ use App\Exceptions\Account\{DailyLimitExceededException, InsufficientBalanceExce
 use App\Exceptions\Transfer\SameAccountTransferException;
 use App\Models\{Account, Transfer, User};
 use App\Repositories\AccountUserRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{Auth, DB};
 
 class TransferService
 {
-    public function __construct(
-        private AccountUserRepository $accountUserRepo
-    ) {
+    public function __construct(private AccountUserRepository $accountUserRepo)
+    {
+        Auth::shouldUse('api');
     }
     public function initiateTransfer(int $fromAccountId, int $receiverAccountId, float $amount): Transfer
     {

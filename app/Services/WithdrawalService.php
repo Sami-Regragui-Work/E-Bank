@@ -11,6 +11,7 @@ class WithdrawalService
 {
     public function __construct(private AccountUserRepository $accountUserRepo)
     {
+        Auth::shouldUse('api');
     }
 
     public function makeWithdrawal(int $accountId, float $amount): Withdrawal

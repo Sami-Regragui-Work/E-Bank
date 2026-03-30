@@ -11,6 +11,7 @@ class AccountService
 {
     public function __construct(private AccountUserRepository $accountUserRepo)
     {
+        Auth::shouldUse('api');
     }
 
     public function createAccount(string $typeName, ?int $guardianId = null): Account
